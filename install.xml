@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>Интеграция с AmoCRM</name>
+	<code>amocrm_to_opencart</code>
+	<version>1.0</version>
+	<author>Edward Rybka</author>
+	<link>https://crug15.kh.ua/</link>
+  
+  
+  	<file path="catalog/controller/checkout/success.php">
+		<operation>
+			<search index="0"><![CDATA[if (isset($this->session->data['order_id'])) {]]></search>
+			<add position="after"><![CDATA[$this->load->model('setting/amocrm');
+			                               $this->model_setting_amocrm->addOrder($this->session->data['order_id']);]]></add>
+		</operation>
+	</file>
+ 
+
+</modification>
