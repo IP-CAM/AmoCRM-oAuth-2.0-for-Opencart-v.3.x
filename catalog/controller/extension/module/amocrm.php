@@ -13,6 +13,8 @@ class ControllerExtensionModuleAmocrm extends Controller {
 					$module_id = $this->model_setting_amocrm->access_token();
 					$this->response->redirect($url->link('extension/module/amocrm', 'user_token=' . $this->session->data['user_token'] . '&type=module&module_id='.$module_id, true));
 				}
+			}else{
+				echo "Error auth";
 			}
 		}
 		public function hook(){

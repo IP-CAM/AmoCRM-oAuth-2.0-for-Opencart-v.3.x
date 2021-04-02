@@ -114,9 +114,7 @@ class ControllerExtensionModuleAmocrm extends Controller {
 		} else {
 			$data['referer'] = '';
 		}
-		if (isset($this->request->post['client_secret'])) {
-			$data['client_secret'] = $this->request->post['client_secret'];
-		} elseif (!empty($module_info)) {
+		if (isset($module_info['client_secret'])) {
 			$data['client_secret'] = $module_info['client_secret'];
 		} else {
 			$data['client_secret'] = '';

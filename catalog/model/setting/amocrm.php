@@ -25,6 +25,10 @@ class ModelSettingAmocrm extends Model {
 		    $data = $this->getModule('amocrm');
 			/** Соберем данные для запроса */
 			$url = new Url(HTTP_SERVER, $this->config->get('config_secure') ? HTTP_SERVER : HTTPS_SERVER);
+
+			if(!isset($data['client_secret'])){
+				return false;
+			}
 			$data = [
 				'client_id' => trim($data['client_id']),
 				'client_secret' => trim($data['client_secret']),
