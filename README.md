@@ -1,3 +1,26 @@
+# OpenCart AMOCRM OAUTH 2.0 (Beta)
+OpenCart 3.x and AMOCRM Integration
+
+
+
+
+
+# Installation
+
+1. Download the archive [amo.ocmod.zip] (https://github.com/edwardrybka/opencart-amocrm-oauth-2.0/blob/main/amo.ocmod.zip)
+2. Go to the admin panel "Modules / extensions" -> "Install extensions" and load the file
+3. Go to "Modules / Extensions" -> ** Integration AMOCRM ** -> Activate the module
+4. Go to editing the module and click Connect AMO after moving to the website of AMO and follow the instructions .....
+
+# Set up
+
+Of the features of the setup, to work the change status of the Uvas in AMO to supply the SELECT (ENUM) field with the status of similar in that in OpenCart, as well as the order number in Lida, additionally, you must specify Webhook to shoot Lida: https: // {{domain}} /INDEX.php?Route=Extension/Module/amocrm/hook
+
+The remaining settings are understandable and logical, screenshots of the module, can be viewed in Wiki
+
+Communication with the development: https://t.me/ed_ryb1
+
+---
 # Opencart AmoCRM oAuth 2.0(beta)
 Интеграция Opencart 3.x и AmoCRM
 
