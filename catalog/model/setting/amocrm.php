@@ -225,4 +225,16 @@ class ModelSettingAmocrm extends Model {
 		}
 		return true;	
 	}
+	public function catalog_elements($catalog_elements){
+		return $this->curl_post('/api/v2/catalog_elements',$catalog_elements);
+	}
+	public function LinkAdd($leads_id,$link_add){
+		return $this->curl_post("/api/v4/leads/$leads_id/link",$link_add);
+	}
+	public function getProductsSettings(){
+		return $this->curl_post('/api/v2/products_settings');
+	}
+	public function addLeadsComplex($leads){
+		return $this->curl_post('/api/v4/leads/complex',[$leads]);
+	}
 }

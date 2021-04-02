@@ -103,14 +103,12 @@ class ModelExtensionModuleAmocrm extends Model {
 		}
 		return $out;
 	}
-
 	public function leads_custom_fields(){
 		return $this->curl_post('/api/v4/leads/custom_fields');
 	}
 	public function contacts_custom_fields(){
 		return $this->curl_post('/api/v4/contacts/custom_fields');
 	}
-
 	public function getUsers(){
 		return $this->curl_post('/api/v4/users');
 	}
@@ -232,17 +230,11 @@ class ModelExtensionModuleAmocrm extends Model {
 		}
 		return true;	
 	}
-
-	public function getColumsOrder() {
-		
+	public function getColumsOrder() {	
 		return $this->db->query("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".DB_DATABASE."' AND TABLE_NAME = '".DB_PREFIX."order'")->rows;
 	}
-
 	public function getOrderStatus() {
 		
 		return $this->db->query("SELECT * FROM ".DB_PREFIX."order_status WHERE language_id='".(int)$this->config->get('config_language_id') ."'")->rows;
 	}
-
-
-	
 }

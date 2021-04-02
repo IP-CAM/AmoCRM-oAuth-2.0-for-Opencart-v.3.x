@@ -3,6 +3,15 @@
 class ControllerExtensionModuleAmocrm extends Controller {
 	private $error = array();
 
+	public function install() {
+		$this->load->model('setting/event');
+		$this->model_setting_event->addEvent('extension_amocrm_checkout_addorder', 'catalog/controller/checkout/success/before', 'setting/module/amocrm/addOrder');
+	}
+	public function uninstall() {
+		$this->load->model('setting/event');
+		$this->model_setting_event->deleteEventByCode('extension_amocrm_checkout_addorder');
+	}
+
 	public function index() {
 		$this->load->language('extension/module/Amocrm');
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -17,8 +26,11 @@ class ControllerExtensionModuleAmocrm extends Controller {
 			$module_info = false;
 		}
 
-
-		$data['order_shop_status'] = $module_info['order_status'];
+		if(isset($module_info['order_status'])){
+			$data['order_shop_status'] = $module_info['order_status'];
+		}else{
+			$data['order_shop_status'] = [];
+		}
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (!isset($this->request->get['module_id'])) {
 				$this->model_setting_module->addModule('amocrm', $this->request->post);
@@ -113,16 +125,19 @@ class ControllerExtensionModuleAmocrm extends Controller {
 		foreach ($this->model_extension_module_amocrm->getColumsOrder() as $key => $value) {
 			$data['leads_rows_shops'][$value['COLUMN_NAME']] = $value['COLUMN_NAME'];
 		}
-		$data['leads_count'] = count($module_info['leads']);
 		if(isset($module_info['contacts'])){
+			$data['contacts_count'] = count($module_info['contacts']);
 			$data['contacts'] = $module_info['contacts'];
 		}else{
+			$data['contacts_count'] = 0;
 			$data['contacts'] = [];
 		}
 		if(isset($module_info['leads'])){
 			$data['leads'] = $module_info['leads'];
+			$data['leads_count'] = count($module_info['leads']);
 		}else{
 			$data['leads'] = [];
+			$data['leads_count'] = 0;
 		}
 		if(isset($module_info['other'])){
 			$data['other'] = $module_info['other'];
@@ -135,7 +150,7 @@ class ControllerExtensionModuleAmocrm extends Controller {
 			$data['task'] = [];
 		}
 
-		$data['contacts_count'] = count($module_info['contacts']);
+		
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];
 		} elseif (!empty($module_info)) {
